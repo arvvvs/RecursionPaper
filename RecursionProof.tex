@@ -174,7 +174,8 @@ $\blacksquare$
 \\
 {\bf Example} Factorials are another example of a recursive function defined as $n!$ for all nonnegative $\mathbb{Z}$
 \\
-{\bf Base Case} $n=1$, where the factoral of$1 (denoted 1!)$, is$ 1$
+{\bf Base Case} $n=1$, where the factoral of $1$ (denoted $1!)$, is$ 1$.
+One can argue that $0!$ is another base case but the $0!=1$ so it is inconsequential. 
 \\
 {\bf Formula} $n! = n * (n-1)!$ for all non negative $\mathbb{Z}$ 
 \\
@@ -196,7 +197,9 @@ $\blacksquare$
 
 \end{center}
 ~\\
-Factorials can be defined as the product of all positive $\mathbb{Z}$ less than $n$.  
+Factorials can be defined as the product of all positive $\mathbb{Z}$ less than $n$. In the factorials you can see recursion solving instances of smaller problems when the factorial of $k$ is computed by finding out the factorials of smaller positive $\mathbb{Z}$, like $(k-1)$. And unlike the Fibonacci Sequence, Factorial's base case, when $n=1$, is their "terminating condition".    \\
+The "terminating condition" in a recursive sequence is the point where the recursive process ends, so that the recursion doesn't become an infinite recursion.  
+
 
 
 \end{document}
