@@ -169,7 +169,7 @@ $\blacksquare$
 \\
 \begin{comment}
 	ToDo: Factorials, Other math stuff (like Catlan numbers) glanced over, Finally Computer Science implementation,Other applications: in nature Fractals
-	also: recursive humor
+	also: recursive humor, recursive acronym: discuss recursion in languages?
 \end{comment}
 \\
 {\bf Example} Factorials are another example of a recursive function defined as $n!$ for all nonnegative $\mathbb{Z}$
@@ -199,6 +199,51 @@ One can argue that $0!$ is another base case but the $0!=1$ so it is inconsequen
 ~\\
 Factorials can be defined as the product of all positive $\mathbb{Z}$ less than $n$. In the factorials you can see recursion solving instances of smaller problems when the factorial of $k$ is computed by finding out the factorials of smaller positive $\mathbb{Z}$, like $(k-1)$. And unlike the Fibonacci Sequence, Factorial's base case, when $n=1$, is their "terminating condition".    \\
 The "terminating condition" in a recursive sequence is the point where the recursive process ends, so that the recursion doesn't become an infinite recursion.  
+{\bf Applications in Computer Science}
+\\
+
+Recursion is an important element in computer science. Not only can it be used to solve mathematical problems like Factorials, the Fibinocci Sequence but it is also used to create Data Structures to store information, or search through some structures. 
+\\Below is a program written in Pseudocode to compute factorials:
+\begin{center}
+	{\bf function:} factorial
+	\\
+	{\bf input:} an non negative integer n whose factorial will be computed
+	\\
+	{\bf output:} print factorial(n)
+	\begin{enumerate}
+	
+		\item if n is 0 return 1
+		\item else return ($n * factorial(n-1)$)
+	\end{enumerate}
+\end{center}
+~\\
+{\bf Step by Step Computing for $n=4$}
+One way to imagine recursion in Computer Science is like a stack of coins. Each time the function factorial is called a new "coin" is placed on top of the stack. Each "coin" is a version of the function being called except different data is being used.  When n=0 however we instead begin to remove the coins, as now the function is no longer being called rather it is returning data. We begin to "remove" the coins, one by one as each coin now "returns" the data instead of calling the function and cotinues to do so until no more "coins" are left.
+\\
+A step by step version of the program is shown below:
+\begin{enumerate}
+	\item $n=4$ so $4* factorial(n-1)$
+	\item $n=3$ so $3* factorial(n-1)$
+	\item $n=2$ so $2* factorial(n-1)$
+	\item $n=1$ so $1* factorial(n-1)$
+	\item $n=0$ so $return 1$
+	\item Now $n=0$ and no more functions are being called 
+	\item return $1*1$
+	\item return $2*1$
+	\item return $3*2$
+	\item return $6*4$
+	\item return $4*6$
+	\item print $24$
+\end{enumerate}
+~\\A similar program can be written to solve the recursive version of Fibonacci Sequence.  
+{\bf Writing a program to solve the Fibonacci Sequence}
+\\
+Below is a program written in C to solve the Fibonacci Sequence 
+\\
+
+~\\A simple data structure which relies on recursion to store data is the linked list.  The Linked List can be best imagined as a series of boxes (called nodes) which contains three things: the data, and two "pointer" to the next and previous boxes (often called the left and the right pointers). Suppose you need to find information on a someone named Jim. If no such information exists you have to create a box with the data "Jim". The program has no idea how many nodes they are or where the "Jim" box is. So a function a simple function is created to traverse the linked list called "searchJim"that looks at the data in each box.  If Jim does not exist you simply call the function again, except this time telling it to look at the next box.             	
+
+
 
 
 
