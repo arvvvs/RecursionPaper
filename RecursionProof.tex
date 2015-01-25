@@ -7,7 +7,7 @@
 \newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
 \newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
 \begin{document}
-
+\lstset{language=C}
 \title{Recursion and Applications}
 \author{Akshay Raj Verma}
 \maketitle
@@ -246,12 +246,14 @@ Below is a program written in the programming language C to solve the Fibonacci 
 	Output: Fibonacci Number for n.
 	*/
 	int fibonacci(int n)
+	{
 		if(n=0)
 			return 0;
 		else if(n=1)
 			return 1;
 		else
 			return(fibonacci(n-1)+fibonacci(n-2));
+		}
 \end{lstlisting}
 		
 	
@@ -265,7 +267,7 @@ As we can see in the program above the function fibonacci, unlike the function f
 
 ~\\A simple data structure which relies on recursion to store data is the linked list.  The Linked List can be best imagined as a series of boxes (called nodes) which contains three things: the data, and two "pointer" to the next and previous boxes (often called the left and the right pointers). Suppose you need to find information on a someone named Jim. If no such information exists you have to create a box with the data "Jim". The program has no idea how many nodes they are or where the "Jim" box is. So a function a simple function is created to traverse the linked list called "searchJim"that looks at the data in each box.  If Jim does not exist you simply call the function again, except this time telling it to look at the next box(the box to the right), until either Jim is found or the program stops as the next node contains nothing. If the the node cotains nothing then create a new box or "node" containing the data Jim, and have the last nodes right pointer "point" to the newly created node and the "Jim box" left pointer point to the previous box.                 	
 \\
-The linked list is a relatively simple data structure.  However it is the foundation for more complex data structures such as the Binary Search Tree.
+The linked list is a relatively simple data structure.  However it is the foundation for more complex data structures such as the Binary Search Tree (which we will not go further into).
 
 
 
