@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{verbatim}
+\usepackage{listings}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{mathtools}
@@ -232,16 +233,39 @@ A step by step version of the program is shown below:
 	\item return $2*1$
 	\item return $3*2$
 	\item return $6*4$
-	\item return $4*6$
 	\item print $24$
 \end{enumerate}
 ~\\A similar program can be written to solve the recursive version of Fibonacci Sequence.  
+\\
 {\bf Writing a program to solve the Fibonacci Sequence}
 \\
-Below is a program written in C to solve the Fibonacci Sequence 
+Below is a program written in the programming language C to solve the Fibonacci Sequence 
 \\
+\begin{lstlisting}
+	/* Input: non negative integer n.
+	Output: Fibonacci Number for n.
+	*/
+	int fibonacci(int n)
+		if(n=0)
+			return 0;
+		else if(n=1)
+			return 1;
+		else
+			return(fibonacci(n-1)+fibonacci(n-2));
+\end{lstlisting}
+		
+	
+\begin{comment}
+n=4
+f(3)f(2)
+f(
+\end{comment}
+~\\
+As we can see in the program above the function fibonacci, unlike the function factorial, is beinged called to return two seperate times: once to calculate the fibonacci number for $n-1$ and again to calculate the fibonacci number for $n-2$.  The function call to $fibonacci$ is repeated until $n=0$,and $n=1$ are called.    
 
-~\\A simple data structure which relies on recursion to store data is the linked list.  The Linked List can be best imagined as a series of boxes (called nodes) which contains three things: the data, and two "pointer" to the next and previous boxes (often called the left and the right pointers). Suppose you need to find information on a someone named Jim. If no such information exists you have to create a box with the data "Jim". The program has no idea how many nodes they are or where the "Jim" box is. So a function a simple function is created to traverse the linked list called "searchJim"that looks at the data in each box.  If Jim does not exist you simply call the function again, except this time telling it to look at the next box.             	
+~\\A simple data structure which relies on recursion to store data is the linked list.  The Linked List can be best imagined as a series of boxes (called nodes) which contains three things: the data, and two "pointer" to the next and previous boxes (often called the left and the right pointers). Suppose you need to find information on a someone named Jim. If no such information exists you have to create a box with the data "Jim". The program has no idea how many nodes they are or where the "Jim" box is. So a function a simple function is created to traverse the linked list called "searchJim"that looks at the data in each box.  If Jim does not exist you simply call the function again, except this time telling it to look at the next box(the box to the right), until either Jim is found or the program stops as the next node contains nothing. If the the node cotains nothing then create a new box or "node" containing the data Jim, and have the last nodes right pointer "point" to the newly created node and the "Jim box" left pointer point to the previous box.                 	
+\\
+The linked list is a relatively simple data structure.  However it is the foundation for more complex data structures such as the Binary Search Tree.
 
 
 
