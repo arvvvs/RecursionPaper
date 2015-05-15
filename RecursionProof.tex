@@ -17,7 +17,7 @@
 A recursion consists of two parts:
 \begin{enumerate}
 	\item A base case (or cases)
-	\item An algorithm which is used to solve instances of smaller problems, using the solution and the algorithm to solve the original problem
+	\item An algorithm which is used to solve instances of smaller problems, until the problem is reduced to its base case.   
 \end{enumerate}
 {\bf Example:} The Fibonacci Sequence is a famous example of a recursive function\\
 \hspace{10mm}{\bf Base Case:}  \hspace{10mm}$f(0)=0$ and $f(1)=1$
@@ -169,7 +169,9 @@ $\blacksquare$
 \\
 ~\\
 ~\\
-{\bf Conclusions:} While both formulas for the Fibonacci series give the same results for $n$, from the definition of computational mathematics they are very different. To find Fibonacci series recursively using $F_n$ requires $n-1$ sums or $O(n)$ time in big O notation. To computationally find the solution to $n$ using Binet's Formula would actually takes longer in cases where $n$ is a relatively small number due to the relative complexity of Binet's Formula.  However to find the Fibonacci Number for a large $n$ it is faster to use Binet's Formula. The recursive definition for the Fibonacci Sequence however is much more efficient if one wishes to find the Fibonacci Numbers in traversal order from $1$ to $n$.      
+{\bf Conclusions:} 
+\begin{comment}While both formulas for the Fibonacci series give the same results for $n$, from the definition of computational mathematics they are very different. To find Fibonacci series recursively using $F_n$ requires $n-1$ sums or $O(n)$ time in big O notation. To computationally find the solution to $n$ using Binet's Formula would actually takes longer in cases where $n$ is a relatively small number due to the relative complexity of Binet's Formula.  However to find the Fibonacci Number for a large $n$ it is faster to use Binet's Formula. The recursive definition for the Fibonacci Sequence however is much more efficient if one wishes to find the Fibonacci Numbers in traversal order from $1$ to $n$.    
+\end{comment}  
 \\
 \begin{comment}
 	ToDo: Factorials, Other math stuff (like Catalan numbers) glanced over, Finally Computer Science implementation,Other applications: in nature Fractals
@@ -202,7 +204,10 @@ One can argue that $0!$ is another base case but the $0!=1$ so it is inconsequen
 
 \end{center}
 ~\\
-Factorials can be defined as the product of all positive $\mathbb{Z}$ less than $n$. In the factorials you can see recursion solving instances of smaller problems when the factorial of $k$ is computed by finding out the factorials of smaller positive $\mathbb{Z}$, like $(k-1)$. And unlike the Fibonacci Sequence, Factorial's base case, $n=1$, is its "terminating condition", or the point where the recursive process ends, so that the recursion does not continue infinitely.  
+\begin{comment}Factorials can be defined as the product of all positive $\mathbb{Z}$ less than $n$. In the factorials you can see recursion solving instances of smaller problems when the factorial of $k$ is computed by finding out the factorials of smaller positive $\mathbb{Z}$, like $(k-1)$. And unlike the Fibonacci Sequence, Factorial's base case, $n=1$, is its "terminating condition", or the point where the recursive process ends, so that the recursion does not continue infinitely.  
+\end{comment}
+Factorial, denoted by $n!$, is the product of all positive integers less than or equal to the positive integer $n$.  As shown by the process above, we can see repetition in the process the factorial function uses to solve for smaller $\mathbb{Z}$ before building up to the bigger $\mathbb{Z}$.  
+
 ~\\
 \section{Applications in Computer Science}
 
@@ -276,7 +281,73 @@ f(3)f(2)
 f(
 \end{comment}
 ~\\
-As we can see in the program above the function fibonacci, unlike the function factorial, is being called to return two separate times: once to calculate the Fibonacci number for $n-1$ and again to calculate the Fibonacci number for $n-2$.  The function call to $fibonacci$ is repeated until $n=0$,and $n=1$ are called.  
+As we can see in the program above the function fibonacci, unlike the function factorial, is being called to return two separate times: once to calculate the Fibonacci number for $n-1$ and again to calculate the Fibonacci number for $n-2$.  The function call to $fibonacci$ is repeated until $n=0$,and $n=1$ are called.
+\section{Recursion vs. Iteration}
+
+When we talk about recursion, we should also consider iteration. Anything done recursively can be done iteratively. But when do we choose one over another. Generally speaking, in computer science, recursion is an easier to read solution than a solution that is written iteratively. While the code may look cleaner and is more concise, what is happening as the program is running may not be as swift. 
+First, let's consider readibility and consider an iterative Tower of Hanoi implementation. We will assume that a stack called Stack has been created and will be used for the succession of the solution. Furthermore, we will assume each edge case is being handled. And finally, we will assume all the appropriate helper functions have been implemented.  Here, I will just show the iterative step.
+\\
+\begin{lstlisting}
+public void iterativeHanoi (int numberOfDisks, struct Stack *sourceStack, struct Stack *transitionStack, struct Stack * finalStack)
+{
+	int i;
+	int totalMoves;
+	
+	for (i = numberOfDisks; i >= 1; i--)
+	{
+		push(sourceStack, i);
+	}
+	
+	for (i = 1; i <= totalMoves; i++)
+	{
+		if (i$ % 3 == 1)
+		{
+			moveDisks(sourceStack, finalStack);
+		}
+		
+		else if (i % 3 == 2)
+		{
+			moveDisks(sourceStack, transitionStack);
+		}
+		
+		else if (i % 3 == 0)
+		{
+			moveDisks(transitionStack, finalStack);
+		}
+	}
+}
+\end{lstlisting}
+\begin{comment} Now, let's consider the recursive case. Again, we will assume everything around this recursive step is implemented correctly. \end{comment}
+\begin{lstlisting}
+public void recursiveHanoi (int diskSize, struct Stack *sourceStack,   structStack *transitionStack, struct Stack *finalStack)
+{
+	// Base Case
+	if (diskSize = 0)
+	{
+		// done
+	}
+	
+	else 
+	{
+		recursiveHanoi(diskSize - 1, soureStack, transitionStack, finalStack);
+		moveDisk(diskSize, finalStack);
+		recursiveHanoi(diskSize - 1; transitionStack, finalStack, sourceStack);
+	}
+}
+\end{lstlisting}
+\begin{comment} As we can see from both iterative and recursive implementations, the iterative case is a little more difficult to implement and a little harder to understand. Furthemore, it takes up a of screen space as opposed to the recursive definition. \end {comment}
+~\\
+\section{Problems with Recursion}
+
+Recursion makes code more readable and more concise. Furthermore, in mathematics, we can use induction to prove the correctness of recursive code. But in computer science, recursion can cause performance issues in terms of time needed to complete the recursion as well as the memory required to do the recursion.In fact, in order to make recursion better on time and space, we would need to use other methods of programming such as dynamic programming to maximize efficiency. 
+~\\
+So, what makes recursion inefficient? First, let us understand how recursion works when implemented by a compiler.
+\\ 
+~\\
+When we talk about recursion in computer science, we need to talk about call stacks and stack frames. A call stack is a data structure that is used by the program to store current information about the subroutines as the program is being executed. The call stack is essential to keep track of how subroutines delegate control once it finishes executing. A call stack is composed of stack frames and a new one is created everytime a subroutines is called. So, in recursion, everytime we call the recursive function, a new stack from is created. 
+\\
+~\\
+So, from the above information, we can see why recursion can be a lot slower and memory inefficient. If we are creating a new stack frame for each recursive call, we clog up memory and we may run into a stack overflow. Furthemore, because we are using a stack to keep track of the recursion, the program is using a lot of resources to maintain the ever growing stack instead of just the calculations we want from the recursion, which leads into slower execution times. Furthermore, it's hard to understand how far we can go with our recursion without experiencing a stack overflow. 
 \\
 \section{Conclusions}
 Recursion is an important element of Mathematics and Computer Science, used in everyday programs and calculations.  Further on, it is not purely a mathematical construct, it has appearances in nature too.  Snowflake patterns, crystals, and leaf patterns contain fractals which are recursive patterns. If you put two mirrors parallel to each other, an infinite number of nested images are created.  This is an example of infinite recursion in nature. Although there are non recursive ways to implement otherwise Recursive formulas and/or programs, it is more inefficient to use the non recursive formula in certain cases, than it is to use the recursive, as evidenced by the Binet Formula and the Fibonacci Formula.
