@@ -215,7 +215,8 @@ Recursion is an important element in computer science. Not only can it be used t
 \\Below is a program written in Pseudo code to compute factorials:
 \begin{lstlisting}
 	function: factorial
-	input:    an non negative integer n whose factorial will be computed
+	input:    an non negative integer n whose factorial will be
+	 computed
 	output:   print factorial(n)
 	
 		if n is 0 return 1
@@ -281,14 +282,15 @@ f(3)f(2)
 f(
 \end{comment}
 ~\\
-As we can see in the program above the function fibonacci, unlike the function factorial, is being called to return two separate times: once to calculate the Fibonacci number for $n-1$ and again to calculate the Fibonacci number for $n-2$.  The function call to $fibonacci$ is repeated until $n=0$,and $n=1$ are called.
+As seen in the program above the function fibonacci, unlike the function factorial, is being called to return two separate times: once to calculate the Fibonacci number for $n-1$ and again to calculate the Fibonacci number for $n-2$.  The function call to $fibonacci$ is repeated until $n=0$,and $n=1$ are called.
 \section{Recursion vs. Iteration}
 
-When we talk about recursion, we should also consider iteration. Anything done recursively can be done iteratively. But when do we choose one over another. Generally speaking, in computer science, recursion is an easier to read solution than a solution that is written iteratively. While the code may look cleaner and is more concise, what is happening as the program is running may not be as swift. 
-First, let's consider readibility and consider an iterative Tower of Hanoi implementation. We will assume that a stack called Stack has been created and will be used for the succession of the solution. Furthermore, we will assume each edge case is being handled. And finally, we will assume all the appropriate helper functions have been implemented.  Here, I will just show the iterative step.
+When considering recursion, we should also consider iteration. Anything done recursively can be done iteratively. But when do we choose one over another. Generally speaking, in computer science, recursion is an easier to read solution than a solution that is written iteratively. While the code may look cleaner and is more concise, what is happening as the program is running may not be as swift. 
+First, let's consider readibility and consider an iterative Tower of Hanoi implementation. We will assume that a stack called Stack has been created and will be used for the succession of the solution. Furthermore, we will assume each edge case is being handled. And finally, we will assume all the appropriate helper functions have been implemented. Below the iterative step is shown, written in C:
 \\
 \begin{lstlisting}
-public void iterativeHanoi (int numberOfDisks, struct Stack *sourceStack, struct Stack *transitionStack, struct Stack * finalStack)
+public void iterativeHanoi (int numberOfDisks, struct Stack *sourceStack, 
+struct Stack *transitionStack, struct Stack * finalStack)
 {
 	int i;
 	int totalMoves;
@@ -317,40 +319,45 @@ public void iterativeHanoi (int numberOfDisks, struct Stack *sourceStack, struct
 	}
 }
 \end{lstlisting}
-\begin{comment} Now, let's consider the recursive case. Again, we will assume everything around this recursive step is implemented correctly. \end{comment}
+~\\ Consider the recursive case. Again, we will assume everything around this recursive step is implemented correctly. 
 \begin{lstlisting}
-public void recursiveHanoi (int diskSize, struct Stack *sourceStack,   structStack *transitionStack, struct Stack *finalStack)
+public void recursiveHanoi (int diskSize, struct Stack *sourceStack,   structStack *finalStack, struct Stack *transitionStack)
 {
 	// Base Case
-	if (diskSize = 0)
+	if (diskSize == 0)
 	{
 		// done
 	}
 	
 	else 
 	{
-		recursiveHanoi(diskSize - 1, soureStack, transitionStack, finalStack);
+		recursiveHanoi(diskSize - 1, soureStack, transitionStack,
+		 finalStack);
 		moveDisk(diskSize, finalStack);
-		recursiveHanoi(diskSize - 1; transitionStack, finalStack, sourceStack);
+		recursiveHanoi(diskSize - 1; transitionStack, finalStack,
+		 sourceStack);
 	}
 }
 \end{lstlisting}
-\begin{comment} As we can see from both iterative and recursive implementations, the iterative case is a little more difficult to implement and a little harder to understand. Furthemore, it takes up a of screen space as opposed to the recursive definition. \end {comment}
+~\\As we can see from both iterative and recursive implementations, the iterative case is a little more difficult to implement and a little harder to understand. Furthemore, it takes up a of screen space as opposed to the recursive definition. 
 ~\\
 \section{Problems with Recursion}
 
-Recursion makes code more readable and more concise. Furthermore, in mathematics, we can use induction to prove the correctness of recursive code. But in computer science, recursion can cause performance issues in terms of time needed to complete the recursion as well as the memory required to do the recursion.In fact, in order to make recursion better on time and space, we would need to use other methods of programming such as dynamic programming to maximize efficiency. 
+Recursion can be used to make code more readable and more concise. Further on, in mathematics, we can use induction to prove the correctness of recursive code, as we saw with the Binet Formula and Fibonacci Sequence. However in computer science, recursion can cause performance issues in terms of time needed to complete the recursion as well as the memory required to do the recursion.  In fact, in order to make recursion better on time and space, we would need to use other methods of programming such as dynamic programming to maximize efficiency. 
 ~\\
 So, what makes recursion inefficient? First, let us understand how recursion works when implemented by a compiler.
 \\ 
 ~\\
-When we talk about recursion in computer science, we need to talk about call stacks and stack frames. A call stack is a data structure that is used by the program to store current information about the subroutines as the program is being executed. The call stack is essential to keep track of how subroutines delegate control once it finishes executing. A call stack is composed of stack frames and a new one is created everytime a subroutines is called. So, in recursion, everytime we call the recursive function, a new stack from is created. 
+To run a recursive function, the compiler creates call stacks and stack frames. A call stack is a data structure that is used by the program to store current information about the subroutines as the program is being executed. The call stack is essential to keep track of how subroutines delegate control once it finishes executing. A call stack is composed of stack frames and a new one is created everytime a subroutines is called. So, in recursion, everytime we call the recursive function, a new stack from is created. 
 \\
 ~\\
-So, from the above information, we can see why recursion can be a lot slower and memory inefficient. If we are creating a new stack frame for each recursive call, we clog up memory and we may run into a stack overflow. Furthemore, because we are using a stack to keep track of the recursion, the program is using a lot of resources to maintain the ever growing stack instead of just the calculations we want from the recursion, which leads into slower execution times. Furthermore, it's hard to understand how far we can go with our recursion without experiencing a stack overflow. 
+The use of stack frames can be memory inefficient and intesive. By creating a new stack frame for each recursive call, more memory is clogged up.  There is the risk of having a stack overflow- where the recursive algorithm may run `too deep'- using up so much memory that there is no more memory left resulting in a program crash.Futher on, it is difficult to ascertain how deep the recursive algorithm may run without experiencing a stack overflow.  Finally, because we are using a stack to keep track of the recursion, the program is using a lot of resources to maintain the ever growing stack instead of just the calculations we want from the recursion, which leads into slower execution times. 
 \\
 \section{Conclusions}
-Recursion is an important element of Mathematics and Computer Science, used in everyday programs and calculations.  Further on, it is not purely a mathematical construct, it has appearances in nature too.  Snowflake patterns, crystals, and leaf patterns contain fractals which are recursive patterns. If you put two mirrors parallel to each other, an infinite number of nested images are created.  This is an example of infinite recursion in nature. Although there are non recursive ways to implement otherwise Recursive formulas and/or programs, it is more inefficient to use the non recursive formula in certain cases, than it is to use the recursive, as evidenced by the Binet Formula and the Fibonacci Formula.
+Recursion is an important element of Mathematics and Computer Science, used in everyday programs and calculations.  It can allow algorithms (and by extension computer code) to be more concise and readable.  In programs that have thousands of lines of code, and poor documentation recursive algorithms allow other programmers to understand the functionality and purpose of the code much more easily than it's iterative counterpart.  The Tower of Hanoi code is a good example of recursion concise qualities.  Whereas the iterative version took up much more space, the recursive version was far more concise. So while recursion may not be the most efficient method of writing software, it can save a lot of time for a programmer looking at the code for the first time.  This allows software projects to be worked on by multiple developers.  However in software projects that require programs to be more memory efficient and faster, iterative programming may be a better choice.  \\~
+Recursion in mathematics however does not carry the same trade offs as it does in Computer Science.  Recursion allows formulas and algorithms to be concisely written, and may be more easily understood.  Further on strong induction can be used to prove recursive formulas.  An example of this is seen in the recursive Fibonacci Sequence and the Binet Formula. The Fibonacci Sequence can be easily taught to someone who has a basic understanding of addition, where as the Binet Formula requires an understanding of far more complex subjects- roots, powers, and fractions.  
+
+\begin{comment} Further on, it is not purely a mathematical construct, it has appearances in nature too.  Snowflake patterns, crystals, and leaf patterns contain fractals which are recursive patterns. If you put two mirrors parallel to each other, an infinite number of nested images are created.  This is an example of infinite recursion in nature. Although there are non recursive ways to implement otherwise Recursive formulas and/or programs, it is more inefficient to use the non recursive formula in certain cases, than it is to use the recursive, as evidenced by the Binet Formula and the Fibonacci Formula.\end{comment}
 
 
 \end{document}
